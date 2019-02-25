@@ -30,6 +30,10 @@ class Libros extends Component {
     }
   }
 
+  handleOnChange = component => {
+    this.props.history.replace(`/imprenta/${component}`);
+  };
+
   async fetchLibros(categoria) {
     if (categoria !== undefined) {
       const response = await fetch(`/api/libros/categoria/${categoria}`);
@@ -46,7 +50,7 @@ class Libros extends Component {
     const { libros } = this.state;
     return (
       <>
-        <Nav />
+        <Nav handleOnChange={this.handleOnChange} />
         <StyledCategorias>
           {Object.keys(libros).map(libro => (
             <StyledLibro key={libro}>

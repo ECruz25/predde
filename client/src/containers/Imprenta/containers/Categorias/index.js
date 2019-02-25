@@ -38,6 +38,10 @@ class Categorias extends Component {
     this.setState({ categorias });
   }
 
+  handleOnChange = component => {
+    this.props.history.replace(`/imprenta/${component}`);
+  };
+
   onHandleObtenerLibros = categoria => {
     this.props.history.replace(`/imprenta/libros/${categoria}`);
   };
@@ -46,7 +50,7 @@ class Categorias extends Component {
     const { categorias } = this.state;
     return (
       <>
-        <Nav />
+        <Nav handleOnChange={this.handleOnChange} />
         <StyledCategorias>
           {Object.keys(categorias).map(categoria => (
             <StyledCategoria

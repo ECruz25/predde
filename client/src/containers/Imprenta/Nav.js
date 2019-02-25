@@ -1,25 +1,37 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { List, ListItem, ListItemText, AppBar } from '@material-ui/core';
+import {
+  List,
+  ListItem,
+  ListItemText,
+  AppBar,
+  Tabs,
+  Tab
+} from '@material-ui/core';
 
 class Nav extends Component {
   state = {
     value: 0
   };
 
-  handleOnChange(e, value) {
-    this.setState({ value });
-  }
+  handleOnChange = (e, value) => {
+    this.props.handleOnChange(value === 0 ? 'categorias' : 'libros');
+  };
+
   render() {
     return (
-      <List
+      <AppBar
         component="nav"
         style={{
           display: 'flex',
           marginLeft: '200px'
         }}
       >
-        <NavLink
+        <Tabs onChange={this.handleOnChange}>
+          <Tab label="Categorias" />
+          <Tab label="Libros" />
+        </Tabs>
+        {/* <NavLink
           style={{ textDecoration: 'none' }}
           exact
           activeClassName="nav-item-selected"
@@ -47,8 +59,8 @@ class Nav extends Component {
               style={{ paddingLeft: '16px' }}
             />
           </ListItem>
-        </NavLink>
-      </List>
+        </NavLink> */}
+      </AppBar>
     );
   }
 }

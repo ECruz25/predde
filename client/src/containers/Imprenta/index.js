@@ -4,10 +4,14 @@ class Imprenta extends Component {
   redirectToBook(categoriaId) {
     const url = `libros/${categoriaId}`;
   }
+  handleOnChange = component => {
+    this.props.history.replace(`/imprenta/${component}`);
+  };
+
   render() {
     return (
       <>
-        <Nav />
+        <Nav handleOnChange={this.handleOnChange} />
       </>
     );
   }

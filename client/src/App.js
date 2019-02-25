@@ -7,7 +7,7 @@ import Categorias from './containers/Imprenta/containers/Categorias';
 import Libros from './containers/Imprenta/containers/Libros';
 import LibroForm from './containers/Imprenta/containers/Libros/LibroForm';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
+import { pink } from '@material-ui/core/colors';
 
 import './App.css';
 
@@ -21,17 +21,9 @@ const StyledApp = styled.div`
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#757ce8',
-      main: '#3f50b5',
-      dark: '#002884',
-      contrastText: '#fff'
+      main: '#8e24aa'
     },
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000'
-    }
+    secondary: pink
   }
 });
 
