@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import styled from 'styled-components';
 import {
   Button,
   Card,
@@ -9,12 +9,12 @@ import {
   CardActions,
   IconButton,
   SvgIcon
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import AddIcon from "@material-ui/icons/Add";
-import { AppContext } from "../../../../App";
-import Nav from "../../Nav";
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+// import AddIcon from "@material-ui/icons/Add";
+import { AppContext } from '../../../../App';
+import Nav from '../../Nav';
 
 const StyledLibros = styled.div`
   display: grid;
@@ -50,7 +50,7 @@ class Libros extends Component {
       const libros = await response.json();
       this.setState({ libros });
     } else {
-      const response = await fetch("/api/libros");
+      const response = await fetch('/api/libros');
       const libros = await response.json();
       this.setState({ libros });
     }
@@ -64,7 +64,7 @@ class Libros extends Component {
         <StyledLibros>
           {Object.keys(libros).map(libro => (
             <StyledLibro>
-              <Card style={{ height: " 200px" }}>
+              <Card style={{ height: ' 200px' }}>
                 <CardActionArea>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
