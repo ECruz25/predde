@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import Nav from '../../Nav';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { CardContent, Card, CardActions, Typography } from "@material-ui/core";
+import Nav from "../../Nav";
 
 const StyledCategorias = styled.div`
   display: grid;
-  width: 800px;
-  grid-template-columns: repeat(3, 1fr);
+  width: 1000px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 20px;
   margin: 0 auto;
+  margin-top: 100px;
+  minwidth: 275px;
 `;
 
 const StyledCategoria = styled.div`
-  display: grid;
-  height: 20%;
-  justify-content: center;
-  :hover {
-    background-color: purple;
-    cursor: pointer;
-  }
-  .nombre {
-    font-weight: bold;
-    font-size: 15px;
+  // width: 20px;
+  div {
+    padding-left: 20px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
@@ -33,7 +33,7 @@ class Categorias extends Component {
   }
 
   async fetchCategorias() {
-    const response = await fetch('/api/categorias');
+    const response = await fetch("/api/categorias");
     const categorias = await response.json();
     this.setState({ categorias });
   }
@@ -59,8 +59,16 @@ class Categorias extends Component {
                 this.onHandleObtenerLibros(categorias[categoria]._id)
               }
             >
-              <p className="nombre">{categorias[categoria].nombre}</p>
-              <p className="descripcion">{categorias[categoria].descripcion}</p>
+              <Card style={{ marginLeft: "20px" }}>
+                <Typography variant="h5" component="h2">
+                  <p className="nombre">{categorias[categoria].nombre}</p>
+                </Typography>
+                <Typography component="p">
+                  <p className="descripcion">
+                    {categorias[categoria].descripcion}
+                  </p>
+                </Typography>
+              </Card>
             </StyledCategoria>
           ))}
         </StyledCategorias>

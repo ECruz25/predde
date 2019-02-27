@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Input,
+  TextField,
   FormLabel,
   NativeSelect,
   FormControl,
   Button
-} from '@material-ui/core';
+} from "@material-ui/core";
+import Nav from "../../Nav";
 
 class LibroForm extends Component {
   state = { categorias: {}, body: { photo: null } };
@@ -18,13 +20,13 @@ class LibroForm extends Component {
     e.preventDefault();
     const { body } = this.state;
     try {
-      const response = await fetch('/api/libros/crear', {
+      const response = await fetch("/api/libros/crear", {
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
+          Accept: "application/json",
+          "Content-Type": "application/json"
         },
-        method: 'post',
-        body: { photo: 1 }
+        method: "POST",
+        body: body
       });
       console.log(response);
     } catch (error) {
@@ -33,7 +35,7 @@ class LibroForm extends Component {
   };
 
   fetchCategorias = async () => {
-    const respuesta = await fetch('/api/categorias');
+    const respuesta = await fetch("/api/categorias");
     const categorias = await respuesta.json();
     this.setState({ categorias });
   };
@@ -58,56 +60,83 @@ class LibroForm extends Component {
     this.setState({ body: { ...this.state.body, categoria: e.target.value } });
   };
 
+  handleOnChange = component => {
+    this.props.history.replace(`/imprenta/${component}`);
+  };
+
   render() {
     const { categorias } = this.state;
     return (
-      <FormControl
-        style={{
-          display: 'grid',
-          width: '50%',
-          margin: '50px auto',
-          gridRowGap: '20px'
-        }}
-        encType="multipart/form-data"
-        onSubmit={this.submitForm}
-      >
-        <FormLabel htmlFor="nombre">Nombre</FormLabel>
-        <Input
-          type="text"
-          name="nombre"
-          id="nombre"
-          onChange={this.onHandleNombreChange}
-        />
-        <FormLabel htmlFor="precio">Precio</FormLabel>
-        <Input
-          type="number"
-          name="precio"
-          id="precio"
-          onChange={this.onHandlePrecioChange}
-        />
-        <FormLabel htmlFor="categoria">Categoria</FormLabel>
-        <NativeSelect
-          name="categoria"
-          id="categoria"
-          onChange={this.onHandleCategoriaChange}
+      <>
+        <Nav handleOnChange={this.handleOnChange} />
+        <FormControl
+          style={{
+            display: "grid",
+            width: "25%",
+            margin: "100px auto",
+            gridRowGap: "30px"
+          }}
+          encType="multipart/form-data"
+          onSubmit={this.submitForm}
         >
-          {Object.keys(categorias).map(categoria => (
-            <option value={categorias[categoria]._id}>
-              {categorias[categoria].nombre}
-            </option>
-          ))}
-        </NativeSelect>
-        <FormLabel htmlFor="photo">Imagen</FormLabel>
-        <Input
-          type="file"
-          inputType="file"
-          name="photo"
-          id="photo"
-          accept="image/png, image/jpeg"
-          onChange={this.onHandlePhotoChange}
-        />
-        <Button variant="contained">Enviar</Button>
-      </FormControl>
+          <div
+            className="input"
+            style={{ display: "grid", gridTemplateColumns: "100%" }}
+          >
+            <FormLabel htmlFor="nombre">Nombre</FormLabel>
+            <TextField
+              type="text"
+              name="nombre"
+              id="nombre"
+              onChange={this.onHandleNombreChange}
+            />
+          </div>
+          <div
+            className="input"
+            style={{ display: "grid", gridTemplateColumns: "100%" }}
+          >
+            <FormLabel htmlFor="precio">Precio</FormLabel>
+            <TextField
+              type="number"
+              name="precio"
+              id="precio"
+              onChange={this.onHandlePrecioChange}
+            />
+          </div>
+          <div
+            className="input"
+            style={{ display: "grid", gridTemplateColumns: "100%" }}
+          >
+            <FormLabel htmlFor="categoria">Categoria</FormLabel>
+            <NativeSelect
+              name="categoria"
+              id="categoria"
+              onChange={this.onHandleCategoriaChange}
+            >
+              {Object.keys(categorias).map(categoria => (
+                <option value={categorias[categoria]._id}>
+                  {categorias[categoria].nombre}
+                </option>
+              ))}
+            </NativeSelect>
+          </div>
+          <div
+            className="input"
+            style={{ display: "grid", gridTemplateColumns: "100%" }}
+          >
+            <FormLabel htmlFor="photo">Imagen</FormLabel>
+            <Input
+              type="file"
+              inputType="file"
+              name="photo"
+              id="photo"
+              accept="image/png, image/jpeg"
+              onChange={this.onHandlePhotoChange}
+            />
+          </div>
+          <Button variant="contained">Enviar</Button>
+        </FormControl>
+      </>
     );
   }
 }

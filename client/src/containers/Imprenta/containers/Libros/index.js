@@ -1,21 +1,31 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import Nav from '../../Nav';
+import React, { Component } from "react";
+import styled from "styled-components";
+import {
+  Button,
+  Card,
+  CardActionArea,
+  CardContent,
+  Typography,
+  CardActions,
+  IconButton,
+  SvgIcon
+} from "@material-ui/core";
 
-const StyledCategorias = styled.div`
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import AddIcon from "@material-ui/icons/Add";
+import { AppContext } from "../../../../App";
+import Nav from "../../Nav";
+
+const StyledLibros = styled.div`
   display: grid;
   width: 70vw;
   margin-left: 15vw;
   margin-right: 15vw;
   grid-template-columns: repeat(3, 1fr);
+  margin-top: 100px;
 `;
 
-const StyledLibro = styled.div`
-  .nombre {
-    font-weight: bold;
-    font-size: 15px;
-  }
-`;
+const StyledLibro = styled.div``;
 
 class Libros extends Component {
   state = {
@@ -40,7 +50,7 @@ class Libros extends Component {
       const libros = await response.json();
       this.setState({ libros });
     } else {
-      const response = await fetch('/libros');
+      const response = await fetch("/api/libros");
       const libros = await response.json();
       this.setState({ libros });
     }
@@ -51,16 +61,38 @@ class Libros extends Component {
     return (
       <>
         <Nav handleOnChange={this.handleOnChange} />
-        <StyledCategorias>
+        <StyledLibros>
           {Object.keys(libros).map(libro => (
-            <StyledLibro key={libro}>
-              <p className="nombre">{libros[libro].nombre}</p>
-              <p className="precio">{`L. ${libros[libro].precio.toFixed(
-                2
-              )}`}</p>
+            <StyledLibro>
+              <Card style={{ height: " 200px" }}>
+                <CardActionArea>
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {libros[libro].nombre}
+                    </Typography>
+                    <Typography component="p">
+                      {`L. ${libros[libro].precio.toFixed(2)}`}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <AppContext.Consumer>
+                    {context => (
+                      <Button
+                        variant="contained"
+                        size="medium"
+                        color="primary"
+                        onClick={() => context.addToCart(libros[libro], 1)}
+                      >
+                        Comprar
+                      </Button>
+                    )}
+                  </AppContext.Consumer>
+                </CardActions>
+              </Card>
             </StyledLibro>
           ))}
-        </StyledCategorias>
+        </StyledLibros>
       </>
     );
   }
