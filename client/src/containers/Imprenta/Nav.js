@@ -10,10 +10,6 @@ import {
 } from '@material-ui/core';
 
 class Nav extends Component {
-  state = {
-    value: 0
-  };
-
   handleOnChange = (e, value) => {
     this.props.handleOnChange(value === 0 ? 'categorias' : 'libros');
   };
