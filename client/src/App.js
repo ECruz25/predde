@@ -6,6 +6,8 @@ import Imprenta from "./containers/Imprenta";
 import Categorias from "./containers/Imprenta/containers/Categorias";
 import Libros from "./containers/Imprenta/containers/Libros";
 import LibroForm from "./containers/Imprenta/containers/Libros/LibroForm";
+import CategoriaForm from "./containers/Imprenta/containers/Categorias/CategoriaForm";
+
 import Cart from "./containers/Imprenta/containers/Cart";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { pink } from "@material-ui/core/colors";
@@ -71,6 +73,7 @@ const App = () => (
             <Route path="/imprenta/categorias" component={Categorias} exact />
             <Route path="/imprenta/libros" component={Libros} exact />
             <Route path="/imprenta/libros/crear" component={LibroForm} exact />
+            <Route path="/imprenta/categorias/crear" component={CategoriaForm} exact />
             <Route
               path="/imprenta/libros/:categoria"
               component={Libros}
