@@ -17,15 +17,21 @@ class index extends Component {
         width:"50%",  
         height:"100%",
         display: "inline-block",
-        background: "blue",
+        background: "green",
        
       }}>
+        <div style=
+      {{
+        margin:"40%",
+        display: "inline-block",
+      }}>
         <NavLink to="/imprenta" style={{
-          margin:"40%",
+          
           color:"White"
 
          
         }}>Imprenta</NavLink>
+        </div>
         </div>
         <div style=
       {{
@@ -35,10 +41,17 @@ class index extends Component {
         background: "red",
         
       }}>
-        <NavLink to="/editorial" style={{
-          margin:"40%",
+      <div style=
+      {{
+        margin:"40%",
+        display: "inline-block",
+      }}>
+      <NavLink to="/editorial" style={{
+         
           color:"Black"
         }}>Editorial</NavLink>
+      </div>
+        
         </div>
        
       </div>
