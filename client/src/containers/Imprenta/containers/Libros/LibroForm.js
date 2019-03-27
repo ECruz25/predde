@@ -8,7 +8,7 @@ import {
   Button
 } from "@material-ui/core";
 import Nav from "../../Nav";
-
+import "../../../Login/Login.css"
 class LibroForm extends Component {
   state = { categorias: {}, body: { photo: null } };
 
@@ -67,18 +67,19 @@ class LibroForm extends Component {
   render() {
     const { categorias } = this.state;
     return (
-      <>
+      <div className="FormsDiv">
         <Nav handleOnChange={this.handleOnChange} />
         <FormControl
           style={{
             display: "grid",
-            width: "25%",
-            margin: "100px auto",
+            width: "80%",
+            margin: "16px auto",
             gridRowGap: "30px"
           }}
           encType="multipart/form-data"
           onSubmit={this.submitForm}
         >
+          <h2 style={{ color: '#d44179' }}>Ingrese la informacion del Libro</h2>
           <div
             className="input"
             style={{ display: "grid", gridTemplateColumns: "100%" }}
@@ -136,7 +137,8 @@ class LibroForm extends Component {
           </div>
           <Button variant="contained">Enviar</Button>
         </FormControl>
-      </>
+        {/* </div> */}
+      </div>
     );
   }
 }

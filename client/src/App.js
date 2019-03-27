@@ -19,8 +19,8 @@ import "./App.css";
 const StyledApp = styled.div`
   display: grid;
   margin: 0;
-  height: 120vh;
-  grid-template-rows: 10% 70% 20%;
+  height: 100vh;
+  grid-template-rows: 10% 89% 1% ;
   grid-column-gap: 200px;
 `;
 
@@ -88,6 +88,8 @@ const App = () =>(
     </MuiThemeProvider>
   </ContextProvider>
   )
+
+  // Configuring Passport
 
 
 export default App;

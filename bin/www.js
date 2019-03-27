@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 
+
 require('dotenv').config({
   path: 'variables.env'
 });
@@ -16,6 +17,8 @@ mongoose.connection.once('open', () => {
 
 require('../models/Libro');
 require('../models/Categoria');
+require('../models/User');
+require('../config-passport/passsport-setup')
 
 /**
  * Module dependencies.
@@ -28,6 +31,15 @@ var http = require('http');
 /**
  * Get port from environment and store in Express.
  */
+
+ /**
+  * Configuring Passport
+  */
+
+
+
+
+
 
 const port = normalizePort(process.env.PORT || '8080');
 console.log('====================================');
