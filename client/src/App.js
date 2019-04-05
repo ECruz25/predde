@@ -5,6 +5,8 @@ import Containers from "./containers/index";
 import Imprenta from "./containers/Imprenta";
 import Categorias from "./containers/Imprenta/containers/Categorias";
 import Libros from "./containers/Imprenta/containers/Libros";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
 import LibroForm from "./containers/Imprenta/containers/Libros/LibroForm";
 import CategoriaForm from "./containers/Imprenta/containers/Categorias/CategoriaForm";
 
@@ -27,8 +29,25 @@ export const AppContext = createContext();
 class ContextProvider extends Component {
   state = {
     cart: {},
-    total: 0
+    total: 0,
+    loggedIn: false
   };
+  async componentDidMount() {
+    try {
+      const response = await fetch("/api/isloggedIn");
+      this.setState({
+        loggedIn: response.ok
+      });
+    } catch (error) {}
+  }
+  async componentDidUpdate() {
+    try {
+      const response = await fetch("/api/isloggedIn");
+      this.setState({
+        loggedIn: response.ok
+      });
+    } catch (error) {}
+  }
 
   addToCart = (producto, cantidad) => {
     const cart = { ...this.state.cart };
@@ -68,12 +87,18 @@ const App = () => (
         <StyledApp>
           <Switch>
             <Route path="/" component={Containers} exact />
+            <Route path="/login" component={LoginForm} exact />
+            <Route path="/register" component={RegisterForm} exact />
             <Route path="/imprenta" component={Imprenta} exact />
             <Route path="/imprenta/carrito" component={Cart} exact />
             <Route path="/imprenta/categorias" component={Categorias} exact />
             <Route path="/imprenta/libros" component={Libros} exact />
             <Route path="/imprenta/libros/crear" component={LibroForm} exact />
-            <Route path="/imprenta/categorias/crear" component={CategoriaForm} exact />
+            <Route
+              path="/imprenta/categorias/crear"
+              component={CategoriaForm}
+              exact
+            />
             <Route
               path="/imprenta/libros/:categoria"
               component={Libros}

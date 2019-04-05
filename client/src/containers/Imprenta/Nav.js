@@ -14,8 +14,17 @@ import { AppContext } from "../../App";
 
 class Nav extends Component {
   handleOnChange = (e, value) => {
+    debugger;
     this.props.handleOnChange(
-      value === 0 ? "categorias" : value === 1 ? "libros" : "carrito"
+      value === 0
+        ? "categorias"
+        : value === 1
+        ? "libros"
+        : value === 2
+        ? "carrito"
+        : value === 3
+        ? "login"
+        : "register"
     );
   };
 
@@ -26,13 +35,21 @@ class Nav extends Component {
           <AppBar
             style={{
               display: "flex",
-              marginBottom: "200px"
+              marginBottom: "200px",
+              justifyContent: "center"
             }}
           >
             <Tabs onChange={this.handleOnChange}>
               <Tab label="Categorias" />
               <Tab label="Libros" />
               <Tab label={context.state.total} icon={<Cart />} />
+              {console.log(context)}
+              {context.state.isLoggedIn ? (
+                <Tab label="Logout" />
+              ) : (
+                <Tab label="Login" />
+              )}
+              {context.state.isLoggedIn || <Tab label="Register" />}
             </Tabs>
           </AppBar>
         )}

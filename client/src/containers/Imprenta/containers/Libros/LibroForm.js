@@ -28,7 +28,6 @@ class LibroForm extends Component {
         method: "POST",
         body: body
       });
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -39,8 +38,6 @@ class LibroForm extends Component {
     const categorias = await respuesta.json();
     this.setState({ categorias });
   };
-
-  onHandle;
 
   onHandlePhotoChange = e => {
     this.setState({ body: { ...this.state.body, photo: e.target } });
@@ -61,7 +58,15 @@ class LibroForm extends Component {
   };
 
   handleOnChange = component => {
-    this.props.history.replace(`/imprenta/${component}`);
+    if (
+      component === "login" ||
+      component === "logout" ||
+      component === "register"
+    ) {
+      this.props.history.replace(`/${component}`);
+    } else {
+      this.props.history.replace(`/imprenta/${component}`);
+    }
   };
 
   render() {

@@ -10,9 +10,7 @@ import {
 import Nav from "../../Nav";
 
 class CategoriaForm extends Component {
-  state = {  };
-
- 
+  state = {};
 
   submitForm = async e => {
     e.preventDefault();
@@ -32,10 +30,7 @@ class CategoriaForm extends Component {
     }
   };
 
-  
-
   onHandle;
-
 
   onHandleNombreChange = e => {
     this.setState({
@@ -44,11 +39,21 @@ class CategoriaForm extends Component {
   };
 
   onHandleDescripcionChange = e => {
-    this.setState({ body: { ...this.state.body, Descripcion: e.target.value } });
-  }; 
+    this.setState({
+      body: { ...this.state.body, Descripcion: e.target.value }
+    });
+  };
 
   handleOnChange = component => {
-    this.props.history.replace(`/imprenta/${component}`);
+    if (
+      component === "login" ||
+      component === "logout" ||
+      component === "register"
+    ) {
+      this.props.history.replace(`/${component}`);
+    } else {
+      this.props.history.replace(`/imprenta/${component}`);
+    }
   };
 
   render() {
@@ -88,7 +93,7 @@ class CategoriaForm extends Component {
               id="Descripcion"
               onChange={this.onHandleDescripcionChange}
             />
-          </div>        
+          </div>
           <Button variant="contained">Enviar</Button>
         </FormControl>
       </>

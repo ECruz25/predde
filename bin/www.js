@@ -1,39 +1,38 @@
-#!/usr/bin/env node
+const mongoose = require("mongoose");
 
-const mongoose = require('mongoose');
-
-require('dotenv').config({
-  path: 'variables.env'
+require("dotenv").config({
+  path: "variables.env"
 });
 
 mongoose.connect(process.env.DATABASE, { useNewUrlParser: true });
-mongoose.connection.on('error', err => {
+mongoose.connection.on("error", err => {
   console.error(`${err.message}`);
 });
-mongoose.connection.once('open', () => {
-  console.log('connected to mongoose');
+mongoose.connection.once("open", () => {
+  console.log("connected to mongoose");
 });
 
-require('../models/Libro');
-require('../models/Categoria');
+require("../models/Libro");
+require("../models/Categoria");
+require("../models/User");
 
 /**
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('vinculacion-predde:server');
-var http = require('http');
+var app = require("../app");
+var debug = require("debug")("vinculacion-predde:server");
+var http = require("http");
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '8080');
-console.log('====================================');
+const port = normalizePort(process.env.PORT || "8080");
+console.log("====================================");
 console.log(port);
-console.log('====================================');
-app.set('port', port);
+console.log("====================================");
+app.set("port", port);
 
 /**
  * Create HTTP server.
@@ -46,8 +45,8 @@ var server = http.createServer(app);
  */
 
 server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+server.on("error", onError);
+server.on("listening", onListening);
 
 /**
  * Normalize a port into a number, string, or false.
@@ -74,20 +73,20 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-  if (error.syscall !== 'listen') {
+  if (error.syscall !== "listen") {
     throw error;
   }
 
-  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+  var bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+    case "EACCES":
+      console.error(bind + " requires elevated privileges");
       process.exit(1);
       break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
+    case "EADDRINUSE":
+      console.error(bind + " is already in use");
       process.exit(1);
       break;
     default:
@@ -101,6 +100,6 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  debug("Listening on " + bind);
 }

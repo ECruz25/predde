@@ -39,7 +39,15 @@ class Categorias extends Component {
   }
 
   handleOnChange = component => {
-    this.props.history.replace(`/imprenta/${component}`);
+    if (
+      component === "login" ||
+      component === "logout" ||
+      component === "register"
+    ) {
+      this.props.history.replace(`/${component}`);
+    } else {
+      this.props.history.replace(`/imprenta/${component}`);
+    }
   };
 
   onHandleObtenerLibros = categoria => {
