@@ -25,19 +25,16 @@ passport.use('local-signup', new localStrategy({
 }));
 
 passport.use('local-signin', new localStrategy({
-
     usernameField: 'user',
     passwordField: 'password',
     passReqToCallback: true
   }, async (req, username, password, done) => {
-    const user = await User.findOne({user: username});
+    const user = await User.findOne({'user': username});
     if(!user) {
-     // return done(null, false, req.flash('signinMessage', 'No User Found'));
+     return done(null, false, req.flash('signinMessage', 'No User Found'));
     }
     if(!user.validatePassword(password)) {
-        console.log('Incorrecto');
-    //  return done(null, false, req.flash('signinMessage', 'Incorrect Password'));
-      
+        return done(null, false, req.flash('signinMessage', 'Incorrect Password'));
     }
     console.log('Correcto ');
   return done(null, user);
