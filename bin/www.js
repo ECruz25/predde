@@ -15,6 +15,7 @@ mongoose.connection.once("open", () => {
 require("../models/Libro");
 require("../models/Categoria");
 require("../models/User");
+require("../config-passport/passsport-setup");
 
 /**
  * Module dependencies.
@@ -29,9 +30,6 @@ var http = require("http");
  */
 
 const port = normalizePort(process.env.PORT || "8080");
-console.log("====================================");
-console.log(port);
-console.log("====================================");
 app.set("port", port);
 
 /**

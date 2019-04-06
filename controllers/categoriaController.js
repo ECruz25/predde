@@ -4,6 +4,7 @@ const Categoria = model('Categoria');
 exports.crearCategoria = async (req, res) => {
   try {
     const categoria = new Categoria(req.body);
+    
     await categoria.save();
     res.send(200);
   } catch (error) {

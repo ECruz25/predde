@@ -3,17 +3,16 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const session = require("express-session");
 const expressValidator = require("express-validator");
 const bodyParser = require("body-parser");
-const promisify = require("es6-promisify");
-require("./handlers/passport");
 const librosRouter = require("./routes/libros");
 const categoriasRouter = require("./routes/categorias");
-const indexRouter = require("./routes/index");
+const userRouter = require("./routes/users");
 const passport = require("passport");
-var cors = require("cors");
+const session = require("express-session");
+const flash = require("connect-flash");
 const app = express();
+require("./config-passport/passsport-setup");
 
 // view engine setup
 app.set("view engine", "jade");
@@ -25,17 +24,29 @@ app.use(expressValidator());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-//Static file declaration
-app.use(express.static(path.join(__dirname, "client/build")));
 app.use(
   session({
-    secret: "secret",
+    secret: "predeEditorial",
     resave: false,
     saveUninitialized: false
   })
 );
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+
+//Static file declaration
+app.use(express.static(path.join(__dirname, "client/build")));
+
+//Login Messages
+app.use((req, res, next) => {
+  app.locals.signinMessage = req.flash("signinMessage");
+  app.locals.signupMessage = req.flash("signupMessage");
+  app.locals.user = req.user;
+  console.log(app.locals);
+  next();
+});
+
 //build mode
 // app.get("/api", (req, res) => {
 //   // res.sendFile(path.join(__dirname + "/client/public/index.html"));
@@ -46,14 +57,10 @@ app.use(passport.session());
 //   app.use(express.static(path.join(__dirname, "client/build")));
 // }
 
-// app.use((req, res, next) => {
-//   console.log("entre aca");
-//   req.login = promisify(req.login, req);
-//   next();
-// });
-app.use("/api", indexRouter);
+// app.use(express.static(path.join(__dirname, 'client/build')));
 app.use("/api/libros", librosRouter);
 app.use("/api/categorias", categoriasRouter);
+app.use("/api/user", userRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

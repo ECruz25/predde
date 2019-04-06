@@ -58,18 +58,19 @@ class CategoriaForm extends Component {
 
   render() {
     return (
-      <>
+      <div className="FormsDiv">
         <Nav handleOnChange={this.handleOnChange} />
         <FormControl
           style={{
             display: "grid",
-            width: "25%",
-            margin: "100px auto",
+            width: "80%",
+            margin: "120px auto",
             gridRowGap: "30px"
           }}
           encType="multipart/form-data"
           onSubmit={this.submitForm}
         >
+         <h2 style={{ color: 'black'}}>Nueva categoria</h2>
           <div
             className="input"
             style={{ display: "grid", gridTemplateColumns: "100%" }}
@@ -96,7 +97,7 @@ class CategoriaForm extends Component {
           </div>
           <Button variant="contained">Enviar</Button>
         </FormControl>
-      </>
+      </div>
     );
   }
 }

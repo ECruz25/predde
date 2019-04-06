@@ -1,0 +1,120 @@
+Init {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .Init .Header {
+    position: relative;
+    width: 100%;
+    height: 30vh;
+  
+    background: mediumorchid;
+  
+    box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.8);
+  }
+  
+  .Init .Header .Welcome {
+    position: absolute;
+    left: 10px;
+    top: 80px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .Login {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 450px;
+    height: 500px;
+  
+    border: 1px solid #bdbdbd;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0px 0px 11px 0px rgb(0, 0, 0);
+  
+    background: white;
+  
+    justify-content: center;
+  }
+  
+  .Login .Title {
+    display: flex;
+    background: white;
+    justify-content: center;
+    height: 110px;
+}
+
+.Login .Form-Content {
+  justify-content: center;
+  margin-left: 80px;
+  margin-top: 30px;
+  padding-bottom: 10px;
+}
+
+.Login .Form-Content input {
+  position: relative;
+  width: 300px;
+  height: 40px;
+  border: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.73);
+  padding: 10px 5px;
+  box-sizing: border-box;
+  outline: none;
+  margin-top: 20px;
+
+  border-bottom: 1px solid red;
+
+  /* border: 1px solid #bdbdbd; */
+
+  /* background-color: rgba(207, 216, 220, 0.7); */
+}
+
+.Login .Form-Content input:hover {
+  opacity: 0.8;
+}
+
+.Login input[type="submit"] {
+  left: 0px;
+  right: 0px;
+  border-style: none;
+  box-sizing: border-box;
+  outline: none;
+  border-radius: 10px;
+  width: 160px;
+  height: 50px;
+  background-color: #ea4c88;
+  color: #eee;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.Login input[type="submit"]:focus,
+.Login input[type="submit"]:hover {
+  background-color: #d44179;
+}
+
+.FormsDiv {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 450px;
+  height: 510px;
+
+  border: 1px solid #bdbdbd;
+  border-radius: 5px 5px 5px 5px;
+  box-shadow: 0px 0px 11px 0px rgb(0, 0, 0);
+
+  background: white;
+
+  /* justify-content: right; */
+}

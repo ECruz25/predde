@@ -1,21 +1,24 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-mongoose.Promise = global.Promise;
-const md5 = require("md5");
-const validator = require("validator");
-const mongodbErrorHandler = require("mongoose-mongodb-errors");
-const passportLocalMongoose = require("passport-local-mongoose");
-
+const model = mongoose.model;
+const bcrypt = require("bcrypt-nodejs");
 const userSchema = new Schema({
-  username: {
+  user: {
     type: String,
-    required: "Please provide a name",
-    trim: true,
-    unique: true
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
   }
 });
 
-userSchema.plugin(passportLocalMongoose);
-userSchema.plugin(mongodbErrorHandler);
+userSchema.methods.encryptPassword = password => {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+};
 
-module.exports = mongoose.model("User", userSchema);
+userSchema.methods.validatePassword = function(password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
+module.exports = model("User", userSchema);
